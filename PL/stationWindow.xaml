@@ -1,0 +1,77 @@
+﻿<Window x:Class="PL.stationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      
+
+
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="stationWindow" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="myLableStyle"
+ TargetType="Label">
+            <Setter Property="FontSize"
+ Value="20" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+        </Style>
+
+        <Style x:Key="myButtonStyle"
+ TargetType="Button">
+            <Setter Property="FontSize"
+ Value="18" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="16*"/>
+            <ColumnDefinition Width="16*"/>
+
+        </Grid.ColumnDefinitions>
+        <Label Content="station Id" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0"  Style = "{StaticResource myLableStyle}" Margin="0,2,0,72" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="120"  />
+        <Label Content="name" HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" Grid.ColumnSpan="2" Margin="0,72,0,0" Grid.RowSpan="2" Width="120" Height="33" />
+        <Label Content="longitude" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" Grid.ColumnSpan="2" Width="150" Height="33" />
+        <Label Content="latitude" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" Grid.ColumnSpan="2" Margin="0,72,0,0" Grid.RowSpan="2" Width="120" Height="33" />
+        <Label Content="available charge slots" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" Margin="10,13,0,0" Width="282" Height="33" Grid.ColumnSpan="5" />
+        <TextBox x:Name="idTxt" MaxLength="4"  Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Height="26" PreviewKeyDown="idTxt_PreviewKeyDown" Margin="0,11,0,0"/>
+        <TextBox x:Name="nameTxt" Height="26" Text="{Binding name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Column="4"  TextWrapping="Wrap" VerticalAlignment="Top" Width="176" PreviewKeyDown="nameTxt_PreviewKeyDown" Margin="0,4,0,0" Grid.Row="1" />
+        <TextBox x:Name="longitudtTxt" Height="26"  Text="{Binding location.longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="2"  TextWrapping="Wrap" VerticalAlignment="Top" Width="175" Margin="0,7,0,0" PreviewKeyDown="longitudtTxt_PreviewKeyDown"/>
+        <TextBox x:Name="latitudeTxt" Height="26"  Text="{Binding location.latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="3"  TextWrapping="Wrap" VerticalAlignment="Top" Width="175" PreviewKeyDown="latitudeTxt_PreviewKeyDown" Margin="0,16,0,0" />
+        <TextBox x:Name="slotsTxt" Height="26"  Text="{Binding chargeSlots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Center" Grid.Column="4" Grid.Row="4"  TextWrapping="Wrap" VerticalAlignment="Top" Width="176" PreviewKeyDown="slotsTxt_PreviewKeyDown" Margin="0,20,0,0" />
+        <Button x:Name="addBtn" Content="add station" HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="addBtn_Click" Margin="10,12,0,0" Height="30" Width="190"/>
+        <Button x:Name="closeBtn" Content="cancel" HorizontalAlignment="Left" Grid.Column="8" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="94" Style="{StaticResource myButtonStyle}" Click="closeBtn_Click" Margin="10,17,0,0" Height="33" />
+        <ListView x:Name="droneslst"   HorizontalAlignment="Left" Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="4"   VerticalAlignment="Top" Width="207" DataContext="{Binding}" ItemsSource="{Binding}" Height="87" MouseDoubleClick="droneslst_MouseDoubleClick" Margin="58,58,0,0" Grid.RowSpan="2" />
+        <Button x:Name="updateBtn" Content="update details" HorizontalAlignment="Left" Grid.Row="5" Grid.ColumnSpan="3" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="up" Margin="36,17,0,0 "  Height="30" Width="164"/>
+        <Label Name="lstLbl" Content="list of drone charge" HorizontalAlignment="Left" Grid.Column="6" Grid.ColumnSpan="4" VerticalAlignment="Top"  Style = "{StaticResource myLableStyle}" Margin="40,72,0,0" Width="243" Grid.RowSpan="2" Height="33" />
+
+
+    </Grid>
+    <Window.Background>
+        <ImageBrush Opacity="0.5" ImageSource="images\backround.jpg" />
+    </Window.Background>
+</Window>

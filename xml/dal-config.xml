@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<config>
+  <dal>list</dal>
+  <dal-packages>
+    <list class="DalXml" namespace="Dal">DalXml</list>
+    <xml>DalXML</xml>
+  </dal-packages>j
+	<parcelId>1099</parcelId><chargeClear>0.1</chargeClear><chargeLightWeight>0.2</chargeLightWeight><chargeHavyWeight>0.4</chargeHavyWeight><chargeMediumWeight>0.3</chargeMediumWeight><chargineRate>0.1</chargineRate></config>

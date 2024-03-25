@@ -1,0 +1,235 @@
+﻿<Window x:Class="PL.parcelWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="parcelWindow" Height="650" Width="900">
+    <Window.Resources>
+        <Style x:Key="myLableStyle"
+ TargetType="Label">
+            <Setter Property="FontSize"
+ Value="20" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+        </Style>
+
+        <Style x:Key="myButtonStyle"
+ TargetType="Button">
+            <Setter Property="FontSize"
+ Value="16" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+
+
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Label Name="idLbl" Content="Parcel Id" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="0"  Style = "{StaticResource myLableStyle}" Margin="0,2,0,9"  />
+        <Label Name="senderLbl" Content="Sender Id" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" />
+        <Label Name="targetLbl" Content="Target Id" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" />
+        <Label Name="priorLbl" Content="Priority" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="3" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" Grid.ColumnSpan="2" Width="118" />
+        <Label Name="weightLbl" Content="Weight" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="4" Grid.ColumnSpan="2" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" />
+        <TextBox x:Name="idTxt" MaxLength="4" Height="30" Text="{Binding ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2" IsReadOnly="True">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <ComboBox x:Name="senderTxt"  Text="{Binding sender.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"  VerticalAlignment="Top" Width="120" />
+        <ComboBox x:Name="targetCmb"  Text="{Binding targrt.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="priorityCmb"  Text="{Binding priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" />
+        <ComboBox x:Name="WeightCmb"  Text="{Binding weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" />
+        <Button x:Name="addBtn" Content="add Parcel" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="addBtn_Click_1" />
+        <Button x:Name="closeBtn" Content="cancel" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Width="64" Style="{StaticResource myButtonStyle}" Click="closeBtn_Click_1" />
+        <Button x:Name="updateBtn" Content="update details" HorizontalAlignment="Left"  Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Visibility="Hidden" />
+        <Label Name="lstLbl" Content="list of drone charge" Visibility="Hidden" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="4" VerticalAlignment="Top"  Style = "{StaticResource myLableStyle}" Margin="77,37,0,0" Width="273" />
+
+        <Label  Content="Sender " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" />
+        <Label Content="Target " HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" VerticalAlignment="Top" Style = "{StaticResource myLableStyle}" />
+        <TextBox x:Name="sender"  Height="30" Text="{Binding sender.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="2"  VerticalAlignment="Top" Width="120" TextWrapping="Wrap">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="targetTxt" Height="30"  Text="{Binding target.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="2" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" TextWrapping="Wrap">
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="priorityTxt" Height="30" Text="{Binding priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="WeightTxt" Height="30" Text="{Binding weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="4" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Label Name="droneLbl" Content="Drone" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myLableStyle}" />
+        <TextBox x:Name="droneTxt" Height="30" Text="{Binding drone.ID, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="5" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Label Name="reqLbl"  Content="Requested" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="6" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myLableStyle}" />
+        <Label Name="scheLbl" Content="Scheduled" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="7" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myLableStyle}" />
+        <Label Name="pickLbl" Content="PickedUp" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="8" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myLableStyle}" />
+        <Label Name="deliLbl" Content="Delivered" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="9" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myLableStyle}" />
+        <TextBox x:Name="requeTxt" Height="30" Text="{Binding requested, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="6" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="scheTxt" Height="30" Text="{Binding scheduled, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="7" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <TextBox x:Name="pickTxt" Height="30" Text="{Binding pickedUp, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="8" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+
+        <TextBox x:Name="deliTxt"  Height="30" Text="{Binding delivered, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" HorizontalAlignment="Left" Grid.Column="3" Grid.Row="9" Grid.ColumnSpan="2"   VerticalAlignment="Top" Width="120" >
+            <TextBox.Style>
+                <Style TargetType="TextBox">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBox.Style>
+        </TextBox>
+        <Button x:Name="CloseBtn" Content="Close" HorizontalAlignment="Left" Grid.Column="9" Grid.Row="9" Width="64" Style="{StaticResource myButtonStyle}" Click="closeBtn_Click_1" Margin="0,3,0,0" Height="29" VerticalAlignment="Top" />
+
+        <Button x:Name="showDroneBtn" Content="Show Drone" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="5" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="showDroneBtn_Click" Visibility="Hidden" />
+        <Button x:Name="showSenderBtn" Content="Show Sender" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="showSenderBtn_Click" Visibility="Hidden" />
+        <Button x:Name="showTargetBtn" Content="Show Target" HorizontalAlignment="Left" Grid.Column="5" Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Top" Style="{StaticResource myButtonStyle}" Click="showTargetBtn_Click" Visibility="Hidden" />
+        <TextBlock x:Name="idSender" Grid.Column="3" HorizontalAlignment="Left" Margin="0,39,0,0" Text="" Visibility="Hidden" TextWrapping="Wrap" VerticalAlignment="Top" Grid.RowSpan="2" Grid.ColumnSpan="2" Width="120">
+            <TextBlock.Style>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value= "Black"></Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="Red" />
+                            <Setter Property="TextDecorations" Value="Underline" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </TextBlock.Style>
+        </TextBlock>
+
+
+    </Grid>
+    <Window.Background>
+        <ImageBrush Opacity="0.5" ImageSource="images\backround.jpg" />
+    </Window.Background>
+</Window>

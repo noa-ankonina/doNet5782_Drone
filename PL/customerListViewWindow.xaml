@@ -1,0 +1,62 @@
+﻿<Window x:Class="PL.customerListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PL"
+        mc:Ignorable="d"
+        Title="customerListView" Height="450" Width="800">
+
+    <Window.Resources>
+        <Style x:Key="myLableStyle"
+ TargetType="Label">
+            <Setter Property="FontSize"
+ Value="12" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+        </Style>
+
+        <Style x:Key="myButtonStyle"
+ TargetType="Button">
+            <Setter Property="FontSize"
+ Value="12" />
+            <Setter Property="FontFamily"
+ Value="Consolas" />
+            <Setter Property="FontWeight"
+ Value="Bold" />
+            
+        </Style>
+    </Window.Resources>
+    <Grid>
+
+        <Button x:Name="add" Style="{StaticResource myButtonStyle }" Foreground="#FFEEF5F6" FontSize="30" MinWidth="400" MaxWidth="700" Height="auto"  Content="Add new customer"  Click="add_Click" Margin="-185,368,185,-8" Background="{x:Null}" BorderBrush="{x:Null}"/>
+        <Button x:Name="closeBtn" Style="{StaticResource myButtonStyle }" FontSize="30"  Foreground="#FFEEF5F6" Height="auto"  Content="Close"  Click="closeBtn_Click" Margin="497,364,53,-8" Background="{x:Null}" BorderBrush="{x:Null}"/>
+
+        <ListView x:Name="customerLstView" DataContext="{Binding}" ItemsSource="{Binding}"   Margin="8,75,12,60" 
+         
+                  HorizontalContentAlignment="Stretch"   Background="#FFABC6E7" MouseDoubleClick="customerLstView_MouseDoubleClick">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="120" Header="Active"   DisplayMemberBinding="{Binding  active }"  />
+                    <GridViewColumn Width="120" Header="ID"   DisplayMemberBinding="{Binding  ID }"  />
+                    <GridViewColumn Width="200" Header="Name" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Width="200" Header="Phone number" DisplayMemberBinding="{Binding phone}" />
+                    <GridViewColumn Width="200" Header="send parcel" DisplayMemberBinding="{Binding sendAndDeliveredParcels}"/>
+                    <GridViewColumn Width="200" Header="parcel in process" DisplayMemberBinding="{Binding sendAndNotDeliveredParcels}"/>
+                    <GridViewColumn Width="200" Header="parcel on way" DisplayMemberBinding="{Binding onTheWayParcels}"/>
+                    <GridViewColumn Width="200" Header="Recived parcel" DisplayMemberBinding="{Binding gotParcels}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <TextBox x:Name="serchTxtBx"   HorizontalAlignment="Left" Margin="20,10,0,0"  TextWrapping="Wrap" VerticalAlignment="Top" Width="462" Height="48" KeyUp="serchTxtBx_KeyUp" PreviewKeyDown="serchTxtBx_PreviewKeyDown"/>
+        <Image HorizontalAlignment="Left" Height="47" Margin="487,10,0,0" VerticalAlignment="Top" Width="100" Source="images\search.png" Grid.ColumnSpan="2" TouchEnter="Image_TouchEnter"/>
+
+
+    </Grid>
+    <Window.Background>
+        <ImageBrush Opacity="0.5" ImageSource="images\backround.jpg" />
+    </Window.Background>
+</Window>
